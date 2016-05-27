@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wfl.kits">
+          package="com.wfl.kits">
 
     <application
         android:allowBackup="true"
@@ -13,12 +13,42 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".overscroll.OverActivity"></activity>
+        <activity
+            android:name=".overscroll.OverActivity"
+            android:label="@string/action_overscroll">
+            <meta-data
+                android:name="moudle"
+                android:value="main"/>
+        </activity>
+        <activity
+            android:name=".materailprogress.MaterailProgressActiviy"
+            android:label="@string/title_material_progress">
+            <meta-data
+                android:name="moudle"
+                android:value="main"/>
+        </activity>
+        <activity android:name=".AidlActivity"/>
+        <activity
+            android:name=".fullscreen.FullActivity"
+            android:label="Full"
+            android:windowSoftInputMode="stateUnchanged"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="moudle"
+                android:value="main"/>
+        </activity>
+        <activity android:name=".fullscreen.TranslucentActivity"
+            android:screenOrientation="landscape"
+                  android:theme="@style/TranslucentTheme"
+            >
+        </activity>
     </application>
 
 </manifest>

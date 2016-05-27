@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TagsView">
+        <attr name="itemLayout" format="reference"/>
+        <attr name="textviewId" format="reference"/>
+    </declare-styleable>
+</resources>

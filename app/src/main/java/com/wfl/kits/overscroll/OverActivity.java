@@ -10,9 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wfl.kits.R;
+import com.wfl.kits.commons.BaseActivity;
 import com.wfl.kits.widget.OverScrollListView;
 
-public class OverActivity extends AppCompatActivity {
+public class OverActivity extends BaseActivity {
     private OverScrollListView overScrollListView;
 
     @Override

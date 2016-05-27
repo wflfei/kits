@@ -1,0 +1,37 @@
+@startuml
+
+'abstract class AbstractList
+'abstract AbstractCollection
+'interface List
+interface Executor {
+execute(Runnable)
+}
+interface ExecutorService
+abstract class AbstractExecutorService
+class ThreadPoolExecutor
+class Executors
+
+Executor <|-- ExecutorService
+ExecutorService <|-- AbstractExecutorService
+AbstractExecutorService <|-- ThreadPoolExecutor
+
+
+'List <|-- AbstractList
+'Collection <|-- AbstractCollection
+
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+
+'class ArrayList {
+'Object[] elementData
+'size()
+'}
+
+'enum TimeUnit {
+'DAYS
+'HOURS
+'MINUTES
+'}
+
+@enduml

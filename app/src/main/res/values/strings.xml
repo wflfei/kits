@@ -2,4 +2,5 @@
     <string name="app_name">kits</string>
     <string name="action_settings">Settings</string>
     <string name="action_overscroll">Over</string>
+    <string name="title_material_progress">MaterialProgress</string>
 </resources>

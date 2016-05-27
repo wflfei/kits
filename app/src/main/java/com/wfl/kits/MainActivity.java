@@ -1,5 +1,6 @@
 package com.wfl.kits;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -16,10 +17,17 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.wfl.kits.commons.BaseActivity;
 import com.wfl.kits.commons.utils.Views;
+import com.wfl.kits.moudle.Moudle;
+import com.wfl.kits.moudle.Moudles;
 import com.wfl.kits.overscroll.OverActivity;
+import static com.wfl.kits.commons.utils.DisplayUtil.dp2px;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends BaseActivity {
+    Context mActivity;
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
     FloatingActionButton fab;
@@ -28,9 +36,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = this;
         setContentView(R.layout.activity_main);
         toolbar = Views.find(this, R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         fab = Views.find(this, R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +81,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private static class ModuleAdapter extends RecyclerView.Adapter<ViewHolder> {
+    private class ModuleAdapter extends RecyclerView.Adapter<ViewHolder> {
+        List<Moudle> moudles;
+        public ModuleAdapter() {
+            Moudles moudlesManager = Moudles.getInstance(mActivity);
+            moudles = moudlesManager.getMoudles();
+        }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -80,21 +95,35 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.titleTv.setText(position + 1 + "");
+            Moudle moudle = moudles.get(position);
+            holder.itemView.setTag(moudle);
+            holder.titleTv.setText(moudle.getName());
         }
 
         @Override
         public int getItemCount() {
-            return 100;
+            return moudles == null ? 0 : moudles.size();
         }
     }
 
-    private static class ViewHolder extends RecyclerView.ViewHolder {
+    private class ViewHolder extends RecyclerView.ViewHolder {
         public TextView titleTv;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(mItemOnClickListener);
+            itemView.setPadding(dp2px(mActivity, 20), dp2px(mActivity, 20), dp2px(mActivity, 20), dp2px(mActivity, 20));
             titleTv = (TextView) itemView.findViewById(R.id.textView);
         }
     }
+
+    private View.OnClickListener mItemOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Moudle moudle = (Moudle) v.getTag();
+            if (moudle != null) {
+                moudle.start(mActivity);
+            }
+        }
+    };
 }
