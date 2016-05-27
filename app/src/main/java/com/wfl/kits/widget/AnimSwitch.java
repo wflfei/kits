@@ -1,4 +1,4 @@
-package com.wfl.kits.view.path;
+package com.wfl.kits.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,13 +9,12 @@ import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
-
 import com.wfl.kits.R;
 
 /**
  * TODO: document your custom view class.
  */
-public class BeiView extends View {
+public class AnimSwitch extends View {
     private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private float mExampleDimension = 0; // TODO: use a default from R.dimen...
@@ -25,17 +24,17 @@ public class BeiView extends View {
     private float mTextWidth;
     private float mTextHeight;
 
-    public BeiView(Context context) {
+    public AnimSwitch(Context context) {
         super(context);
         init(null, 0);
     }
 
-    public BeiView(Context context, AttributeSet attrs) {
+    public AnimSwitch(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs, 0);
     }
 
-    public BeiView(Context context, AttributeSet attrs, int defStyle) {
+    public AnimSwitch(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
     }
@@ -43,22 +42,22 @@ public class BeiView extends View {
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
-                attrs, R.styleable.BeiView, defStyle, 0);
+                attrs, R.styleable.AnimSwitch, defStyle, 0);
 
         mExampleString = a.getString(
-                R.styleable.BeiView_exampleString);
+                R.styleable.AnimSwitch_exampleString);
         mExampleColor = a.getColor(
-                R.styleable.BeiView_exampleColor,
+                R.styleable.AnimSwitch_exampleColor,
                 mExampleColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
         mExampleDimension = a.getDimension(
-                R.styleable.BeiView_exampleDimension,
+                R.styleable.AnimSwitch_exampleDimension,
                 mExampleDimension);
 
-        if (a.hasValue(R.styleable.BeiView_exampleDrawable)) {
+        if (a.hasValue(R.styleable.AnimSwitch_exampleDrawable)) {
             mExampleDrawable = a.getDrawable(
-                    R.styleable.BeiView_exampleDrawable);
+                    R.styleable.AnimSwitch_exampleDrawable);
             mExampleDrawable.setCallback(this);
         }
 
@@ -112,7 +111,6 @@ public class BeiView extends View {
 
     /**
      * Gets the example string attribute value.
-     *
      * @return The example string attribute value.
      */
     public String getExampleString() {
@@ -122,7 +120,6 @@ public class BeiView extends View {
     /**
      * Sets the view's example string attribute value. In the example view, this string
      * is the text to draw.
-     *
      * @param exampleString The example string attribute value to use.
      */
     public void setExampleString(String exampleString) {
@@ -132,7 +129,6 @@ public class BeiView extends View {
 
     /**
      * Gets the example color attribute value.
-     *
      * @return The example color attribute value.
      */
     public int getExampleColor() {
@@ -142,7 +138,6 @@ public class BeiView extends View {
     /**
      * Sets the view's example color attribute value. In the example view, this color
      * is the font color.
-     *
      * @param exampleColor The example color attribute value to use.
      */
     public void setExampleColor(int exampleColor) {
@@ -152,7 +147,6 @@ public class BeiView extends View {
 
     /**
      * Gets the example dimension attribute value.
-     *
      * @return The example dimension attribute value.
      */
     public float getExampleDimension() {
@@ -162,7 +156,6 @@ public class BeiView extends View {
     /**
      * Sets the view's example dimension attribute value. In the example view, this dimension
      * is the font size.
-     *
      * @param exampleDimension The example dimension attribute value to use.
      */
     public void setExampleDimension(float exampleDimension) {
@@ -172,7 +165,6 @@ public class BeiView extends View {
 
     /**
      * Gets the example drawable attribute value.
-     *
      * @return The example drawable attribute value.
      */
     public Drawable getExampleDrawable() {
@@ -182,7 +174,6 @@ public class BeiView extends View {
     /**
      * Sets the view's example drawable attribute value. In the example view, this drawable is
      * drawn above the text.
-     *
      * @param exampleDrawable The example drawable attribute value to use.
      */
     public void setExampleDrawable(Drawable exampleDrawable) {
