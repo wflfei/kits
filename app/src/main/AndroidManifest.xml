@@ -35,19 +35,33 @@
         <activity android:name=".AidlActivity"/>
         <activity
             android:name=".fullscreen.FullActivity"
-            android:label="Full"
-            android:windowSoftInputMode="stateUnchanged"
             android:configChanges="orientation|keyboardHidden"
+            android:label="Full"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:windowSoftInputMode="stateUnchanged">
             <meta-data
                 android:name="moudle"
                 android:value="main"/>
         </activity>
-        <activity android:name=".fullscreen.TranslucentActivity"
+        <activity
+            android:name=".fullscreen.TranslucentActivity"
             android:screenOrientation="landscape"
-                  android:theme="@style/TranslucentTheme"
-            >
+            android:theme="@style/TranslucentTheme">
+        </activity>
+        <activity
+            android:name=".vector.VectorActivity"
+            android:label="Vector">
+            <meta-data
+                android:name="moudle"
+                android:value="main"/>
+        </activity>
+        <activity android:name=".animateScaleType.AnimatedScaleTypeActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+            android:label="AnimatedScaleType">
+            <meta-data
+                android:name="moudle"
+                android:value="main"/>
         </activity>
     </application>
 

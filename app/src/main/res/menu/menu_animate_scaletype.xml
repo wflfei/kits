@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools">
+
+    <item android:id="@+id/action_fitxy" android:title="@string/action_fitxy"
+          android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_fitstart" android:title="@string/action_fitstart"
+          android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_fitcenter" android:title="@string/action_fitcenter"
+          android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_fitend" android:title="@string/action_fitend"
+          android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_center" android:title="@string/action_center"
+          android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_centercrop" android:title="@string/action_centercrop"
+          android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_centerinside" android:title="@string/action_centerInside"
+          android:orderInCategory="100" app:showAsAction="never" />
+
+</menu>
