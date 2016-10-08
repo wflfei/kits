@@ -1,4 +1,4 @@
-package com.wfl.kits.moudle;
+package com.wfl.kits.module;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -9,22 +9,22 @@ import android.text.TextUtils;
 /**
  * Created by wfl on 16/4/11.
  */
-public abstract class ActivityEntryMoudle implements Moudle{
+public abstract class ActivityEntryModule implements Module {
     protected String name;
     protected Class<Activity> entryActivity;
     protected String entryClassName;
 
 
-    public ActivityEntryMoudle(String name) {
+    public ActivityEntryModule(String name) {
         this.name = name;
     }
 
-    public ActivityEntryMoudle(String name, Class<Activity> tClass) {
+    public ActivityEntryModule(String name, Class<Activity> tClass) {
         this(name);
         this.entryActivity = tClass;
     }
 
-    public ActivityEntryMoudle(String name, String entryClassName) {
+    public ActivityEntryModule(String name, String entryClassName) {
         this(name);
         this.entryClassName = entryClassName;
     }

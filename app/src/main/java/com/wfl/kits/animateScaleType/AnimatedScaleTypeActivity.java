@@ -19,7 +19,7 @@ public class AnimatedScaleTypeActivity extends BaseActivity {
     ImageView.ScaleType mScaleType = ImageView.ScaleType.CENTER_CROP;
     Toolbar mToolbar;
     RecyclerView mRecyclerView;
-    private int[] images = new int[] {R.drawable.one, R.drawable.scenery0, R.drawable.googlelogo};
+    private int[] images = new int[] {R.drawable.googlelogo, R.drawable.scenery0, R.drawable.googlelogo};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

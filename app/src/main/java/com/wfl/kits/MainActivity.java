@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,8 +18,8 @@ import android.widget.TextView;
 
 import com.wfl.kits.commons.BaseActivity;
 import com.wfl.kits.commons.utils.Views;
-import com.wfl.kits.moudle.Moudle;
-import com.wfl.kits.moudle.Moudles;
+import com.wfl.kits.module.Module;
+import com.wfl.kits.module.Moudles;
 import com.wfl.kits.overscroll.OverActivity;
 import static com.wfl.kits.commons.utils.DisplayUtil.dp2px;
 
@@ -82,10 +81,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private class ModuleAdapter extends RecyclerView.Adapter<ViewHolder> {
-        List<Moudle> moudles;
+        List<Module> modules;
         public ModuleAdapter() {
             Moudles moudlesManager = Moudles.getInstance(mActivity);
-            moudles = moudlesManager.getMoudles();
+            modules = moudlesManager.getModules();
         }
 
         @Override
@@ -95,14 +94,14 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Moudle moudle = moudles.get(position);
-            holder.itemView.setTag(moudle);
-            holder.titleTv.setText(moudle.getName());
+            Module module = modules.get(position);
+            holder.itemView.setTag(module);
+            holder.titleTv.setText(module.getName());
         }
 
         @Override
         public int getItemCount() {
-            return moudles == null ? 0 : moudles.size();
+            return modules == null ? 0 : modules.size();
         }
     }
 
@@ -120,9 +119,9 @@ public class MainActivity extends BaseActivity {
     private View.OnClickListener mItemOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Moudle moudle = (Moudle) v.getTag();
-            if (moudle != null) {
-                moudle.start(mActivity);
+            Module module = (Module) v.getTag();
+            if (module != null) {
+                module.start(mActivity);
             }
         }
     };

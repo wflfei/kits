@@ -1,6 +1,5 @@
-package com.wfl.kits.moudle;
+package com.wfl.kits.module;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -15,11 +14,11 @@ import java.util.List;
 public class Moudles {
     private static volatile Moudles instance;
 
-    private List<Moudle> moudles;
+    private List<Module> modules;
 
     private Moudles(Context context) {
-        moudles = new ArrayList<>();
-        moudles.addAll(ManifestMoudles.getMoudles(context));
+        modules = new ArrayList<>();
+        modules.addAll(ManifestModules.getModules(context));
     }
 
     public static Moudles getInstance(Context context) {
@@ -33,44 +32,44 @@ public class Moudles {
         return instance;
     }
 
-    public List<Moudle> getMoudles() {
-        return moudles;
+    public List<Module> getModules() {
+        return modules;
     }
 
-    public void addMoudle(Moudle moudle) {
-        if (moudles == null) {
-            moudles = new ArrayList<>();
+    public void addMoudle(Module module) {
+        if (modules == null) {
+            modules = new ArrayList<>();
         }
-        moudles.add(moudle);
+        modules.add(module);
     }
 
-    static class ManifestMoudles {
-        public static final String KEY_MOUDLE = "moudle";
+    static class ManifestModules {
+        public static final String KEY_MODULE = "module";
 
 
-        public static List<Moudle> getMoudles(Context context) {
-            List<Moudle> moudles = new ArrayList<>();
+        public static List<Module> getModules(Context context) {
+            List<Module> modules = new ArrayList<>();
             PackageManager pm = context.getApplicationContext().getPackageManager();
             try {
                 ActivityInfo[] activities = pm.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES | PackageManager.GET_META_DATA).activities;
                 for (ActivityInfo activityInfo : activities) {
-                    if (isActivityMoudle(activityInfo)) {
-                        moudles.add(new SimpleMoudle((String) activityInfo.loadLabel(pm), activityInfo.name));
+                    if (isActivityModule(activityInfo)) {
+                        modules.add(new SimpleModule((String) activityInfo.loadLabel(pm), activityInfo.name));
                     }
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
-            return moudles;
+            return modules;
         }
 
-        private static boolean isActivityMoudle(ActivityInfo activityInfo) {
+        private static boolean isActivityModule(ActivityInfo activityInfo) {
             if (activityInfo == null) {
                 return false;
             }
             Bundle metaData = activityInfo.metaData;
-            if (metaData != null && metaData.containsKey(KEY_MOUDLE)) {
-                String value = metaData.getString(KEY_MOUDLE);
+            if (metaData != null && metaData.containsKey(KEY_MODULE)) {
+                String value = metaData.getString(KEY_MODULE);
                 if (value == null) {
                     return false;
                 }
