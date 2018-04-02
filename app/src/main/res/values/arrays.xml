@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="simple_list">
+        <item>Jerry</item>
+        <item>Tom</item>
+        <item>Tiger</item>
+        <item>Hello</item>
+        <item>Stupid</item>
+        <item>Manager</item>
+        <item>Green</item>
+        <item>John</item>
+        <item>Wood</item>
+        <item>Can</item>
+        <item>GoodDay</item>
+        <item>Lion</item>
+        <item>Comunication</item>
+        <item>Thanks</item>
+        <item>Congratulation</item>
+        <item>Laugh</item>
+        <item>Last</item>
+    </string-array>
+    
+</resources>

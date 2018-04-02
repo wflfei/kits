@@ -1,0 +1,124 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '24.0.1'
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+//def hott = {
+//    java.lang.Runtime.getRuntime().exec("open .")
+//}
+
+//task runHot(type: DefaultTask) {
+//    hott()
+//}
+
+//task javaSourceGen (type:Exec){
+//    commandLine "open","."
+//}
+
+task copyHotClass(type: Copy) {
+    delete "src/main/java/${project.ext.hotpackage}/${project.ext.hotclass}.class"
+    from "${project.ext.hotmodule}/build/intermediates/classes/debug/${project.ext.hotpackage}/${project.ext.hotclass}.class"
+    into "src/main/java/${project.ext.hotpackage}/"
+}
+
+task copyHotClass2 << {
+    delete "hotsrc/${project.ext.hotpackage}/${project.ext.hotclass}.class"
+    print "../${project.ext.hotmodule}/build/intermediates/classes/debug/${project.ext.hotpackage}/\n"
+    print "hotexec/src/main/java/${project.ext.hotpackage}/\n"
+    print "${project.ext.hotclass}.class\n"
+    copy {
+        from "../${project.ext.hotmodule}/build/intermediates/classes/debug/${project.ext.hotpackage}/${project.ext.hotclass}.class"
+        into "hotsrc/${project.ext.hotpackage}/"
+    }
+//    copy {
+//        from "../app/build/intermediates/classes/debug/com/wfl/kits/dex/hotexec/Command.class"
+//        into "build/"
+//    }
+}
+
+task runHot1 << {
+    java.lang.Runtime.getRuntime().exec("javac hotexec/src/main/java/com/wfl/hotexec/Command.java")
+    java.lang.Runtime.getRuntime().exec("open hotexec/src/main/java/com/wfl/hotexec")
+}
+
+task makeJar(type: Jar) {
+    delete 'build/libs/dextest.jar'
+    baseName 'dextest'
+    from('hotsrc')
+    exclude('android/',  'BuildConfig.class', 'R.class', 'Command.java')
+    exclude {
+        it.name.startsWith('R$');
+    }
+}
+
+//task copyClasses(type: Copy) {
+//    from "build/"
+//}
+
+def dexReady = false
+
+task toDex << {
+    delete '../test.dex'
+    def comm = "${System.env.ANDROID_HOME}/build-tools/${android.buildToolsVersion}/dx --dex --output=test.dex hotexec/build/libs/dextest.jar"
+    println comm
+//    java.lang.Runtime.getRuntime().exec(comm)
+    byte[] bytess = new byte[4000];
+    java.lang.Runtime.getRuntime().exec(comm).getInputStream().read(bytess)
+    println new String(bytess)
+    dexReady = true
+}
+
+makeJar.dependsOn(copyHotClass2)
+toDex.dependsOn(makeJar)
+
+
+
+task runHotSocket << {
+    def server = java.net.ServerSocket(6666)
+    while(true) {
+        server.accept { socket ->
+            socket.withStreams { input, output ->
+                byte[] msgBody = new byte[2000];
+                input.read(msgBody, 0, 2000);
+                def msg = new String(msgBody, 'GBK').trim()
+                println "${new Date().format('yyyy-MM-dd HH:mm:ss')} 接收到的消息: \n========================================\n$msg"
+                
+                if (dexReady) {
+                    output.write(new File('test.dex').readBytes())
+                    dexReady = false
+                }
+                socket.shutdownOutput()
+            }
+
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    testCompile 'junit:junit:4.12'
+//    provided project(':app')
+}
